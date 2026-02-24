@@ -1,27 +1,186 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-@theme inline {
-  /* Dark theme -default */
-  --color-primary-bg: #0a0e27;
-  --color-secondary-bg: #151932;
-  --color-tertiary-bg: #1a1f3a;
-  --color-accent-blue: #3b82f6;
-  --color-accent-purple: #8b5cf6;
-  --color-accent-pink: #ec4899;
-  
-  --background-image-gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  --background-image-gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f59e0b 100%);
+/* ============================================
+   THEME SYSTEM — G-CODE PORTFOLIO
+   3 Themes: dark | light | daltonism
+   ============================================ */
+
+:root,
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-base: #0a0e27;
+  --bg-surface: #151932;
+  --bg-elevated: #1a1f3a;
+  --bg-card: rgba(21, 25, 50, 0.8);
+
+  /* Accent — Blue → Purple gradient (original brand)*/
+  --accent: #3b82f6;
+  --accent-secondary: #8b5cf6;
+  --accent-pink: #ec4899;
+  --accent-orange: #f59e0b;
+  --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --gradient-mesh:
+    radial-gradient(at 40% 20%, hsla(228, 90%, 64%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(280, 80%, 60%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(340, 90%, 60%, 0.15) 0px, transparent 50%);
+
+  /* Text */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-accent: rgba(59, 130, 246, 0.4);
+
+  /* Shadows */
+  --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.2);
+  --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+  /* Special */
+  --success: #10b981;
+  --code-bg: #0d1117;
+  --scrollbar-thumb: #3b82f6;
 }
 
-/* Forzamos el tema oscuro de G-CODE */
-:root {
-  --background: var(--color-primary-bg);
-  --foreground: #f8fafc;
+[data-theme="light"] {
+  --bg-base: #f0ede8;
+  --bg-surface: #e8e4de;
+  --bg-elevated: #ddd9d2;
+  --bg-card: rgba(232, 228, 222, 0.9);
+
+  --accent: #2563eb;
+  --accent-secondary: #7c3aed;
+  --accent-pink: #db2777;
+  --accent-orange: #d97706;
+  --gradient-accent: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --gradient-mesh:
+    radial-gradient(at 40% 20%, hsla(228, 80%, 70%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(280, 70%, 65%, 0.12) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(340, 80%, 65%, 0.1) 0px, transparent 50%);
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+
+  --border: rgba(0, 0, 0, 0.1);
+  --border-accent: rgba(37, 99, 235, 0.4);
+
+  --shadow-glow: 0 0 40px rgba(37, 99, 235, 0.15);
+  --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.1);
+
+  --success: #059669;
+  --code-bg: #1e293b;
+  --scrollbar-thumb: #2563eb;
+}
+
+[data-theme="daltonism"] {
+  /* Same dark base, but accent safe for deuteranopia/protanopia */
+  --bg-base: #0a0e27;
+  --bg-surface: #151932;
+  --bg-elevated: #1a1f3a;
+  --bg-card: rgba(21, 25, 50, 0.8);
+
+  /* Blue + Orange — universally distinguishable */
+  --accent: #0077bb;
+  --accent-secondary: #ee7733;
+  --accent-pink: #cc3311;
+  --accent-orange: #ee7733;
+  --gradient-accent: linear-gradient(135deg, #0077bb 0%, #ee7733 100%);
+  --gradient-mesh:
+    radial-gradient(at 40% 20%, hsla(205, 100%, 37%, 0.25) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(27, 85%, 57%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(205, 100%, 37%, 0.15) 0px, transparent 50%);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-accent: rgba(0, 119, 187, 0.4);
+
+  --shadow-glow: 0 0 40px rgba(0, 119, 187, 0.25);
+  --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+  --success: #0077bb;
+  --code-bg: #0d1117;
+  --scrollbar-thumb: #0077bb;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  /* Usamos Montserrat si la tienes, si no, sans-serif por ahora */
   font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-base);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================
+   TYPOGRAPHY TOKENS
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 2px;
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-padding {
+  padding: 120px 0;
+}
+
+.gradient-text {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+
+::selection {
+  background: var(--accent);
+  color: white;
 }

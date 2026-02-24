@@ -1,54 +1,32 @@
-import { queryWP } from '@/lib/wp';
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import Stats from '@/components/Stats';
-import Expertise from '@/components/Expertise';
-import ProjectCard from '@/components/ProjectCard';
+import Navbar from '@/components/shared/Navbar'
+import Footer from '@/components/shared/Footer'
+import HeroSection from '@/components/home/HeroSection'
+import ServicesSection from '@/components/home/ServicesSection'
+import FeaturedWork from '@/components/home/FeaturedWork'
+import CTABanner from '@/components/home/CTABanner'
+import { fetchFeaturedProjects } from '@/lib/wp'
 
-export default async function Home() {
-  const data = await queryWP(`
-    query GetProjects {
-      projects {
-        nodes {
-          title
-          slug
-          featuredImage { node { sourceUrl } }
-          projectFields {
-            technologies
-            githubUrl
-            liveDemo
-          }
-        }
-      }
-    }
-  `);
-
-  const projects = data?.projects?.nodes || [];
+export default async function HomePage() {
+  // Obtenemos los proyectos con un fallback seguro
+  let projects = [];
+  try {
+    projects = await fetchFeaturedProjects();
+  } catch (err) {
+    console.error("Critical error fetching projects:", err);
+    // projects se queda como [] para que el sitio no explote
+  }
 
   return (
-    <main className="bg-primary-bg min-h-screen text-white">
+    <>
       <Navbar />
-      <Hero />
-      <Stats />
-      
-      <section id="expertise">
-        <Expertise />
-      </section>
-
-      <section id="work" className="py-24 container mx-auto px-6">
-        <div className="mb-16">
-          <span className="text-accent-pink font-mono tracking-[0.5em] text-sm uppercase">Portfolio</span>
-          <h2 className="text-5xl font-black mt-2">SELECTED WORK</h2>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {projects.map((project: any) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
-      </section>
-
-      {/* Aquí podrías añadir el Footer reciclado de tu HTML */}
-    </main>
-  );
+      <main style={{ background: 'var(--color-primary-bg)', minHeight: '100vh' }}>
+        <HeroSection />
+        <ServicesSection />
+        {/* Pasamos los proyectos (ya sea los de WP o el array vacío) */}
+        <FeaturedWork projects={projects} />
+        <CTABanner />
+      </main>
+      <Footer />
+    </>
+  )
 }
