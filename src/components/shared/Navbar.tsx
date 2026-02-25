@@ -2,25 +2,23 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-// Asegúrate de que este archivo exista en tu carpeta ui
 import ThemeSwitcher from '@/components/ui/ThemeSwitcher'
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '#work', label: 'Work' }, // Apuntando a anclas para el Home
-  { href: '#expertise', label: 'Services' },
+  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/work', label: 'Work' },
+  { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ]
 
 export default function Navbar() {
-  const [mounted, setMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
 
-  // Evitamos errores de hidratación esperando al montaje
   useEffect(() => {
-    setMounted(true)
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
       const total = document.documentElement.scrollHeight - window.innerHeight
@@ -30,84 +28,92 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  if (!mounted) return null // No renderiza nada en el servidor para evitar desajustes
-
   return (
     <>
-      {/* Barra de progreso de lectura */}
+      {/* Scroll progress bar */}
       <div style={{
         position: 'fixed',
         top: 0,
         left: 0,
         height: '3px',
         width: `${scrollProgress}%`,
-        background: 'linear-gradient(90deg, var(--color-accent-blue), var(--color-accent-purple))',
+        background: 'var(--gradient-accent)',
         zIndex: 9999,
         transition: 'width 0.1s linear',
+        pointerEvents: 'none',
       }} />
 
       <nav style={{
         position: 'fixed',
-        top: 0,
+        top: '3px', // debajo de la barra de progreso
         left: 0,
         right: 0,
         zIndex: 1000,
-        padding: scrolled ? '12px 0' : '24px 0',
-        background: scrolled ? 'rgba(10, 14, 39, 0.8)' : 'transparent',
+        padding: scrolled ? '12px 0' : '20px 0',
+        background: scrolled ? 'var(--bg-surface)' : 'transparent',
         backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.05)' : 'none',
-        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
+        borderBottom: scrolled ? '1px solid var(--border)' : 'none',
+        transition: 'all 0.3s ease',
       }}>
-        <div className="container mx-auto px-6" style={{
+        <div className="container" style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-          {/* Logo Estilo G-CODE */}
+
+          {/* Logo — estilo <G-CODE/> */}
           <Link href="/" style={{ textDecoration: 'none' }}>
             <span style={{
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '24px',
-              fontWeight: 900,
-              letterSpacing: '-1px',
-              color: 'white'
+              fontFamily: 'Oswald, sans-serif',
+              fontSize: '22px',
+              fontWeight: 700,
+              letterSpacing: '2px',
+              textTransform: 'uppercase',
+              lineHeight: 1,
             }}>
-              G<span style={{ color: 'var(--color-accent-blue)' }}>CODE</span>
-              <span style={{ color: 'var(--color-accent-pink)' }}>.</span>
+              <span style={{ color: 'var(--accent)' }}>&lt;</span>
+              <span style={{ color: 'var(--text-primary)' }}>G-CODE</span>
+              <span style={{ color: 'var(--accent)' }}>/&gt;</span>
             </span>
           </Link>
 
-          {/* Menú Desktop */}
+          {/* Desktop nav */}
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '40px',
+            gap: '32px',
           }} className="desktop-nav">
             <ul style={{
               display: 'flex',
-              gap: '32px',
+              gap: '28px',
               listStyle: 'none',
               alignItems: 'center',
               margin: 0,
-              padding: 0
+              padding: 0,
             }}>
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} style={{
-                    fontFamily: 'monospace',
+                    fontFamily: 'Montserrat, sans-serif',
                     fontSize: '12px',
                     fontWeight: 600,
-                    letterSpacing: '2px',
+                    letterSpacing: '1.5px',
                     textTransform: 'uppercase',
-                    color: 'rgba(255,255,255,0.7)',
+                    color: 'var(--text-secondary)',
                     textDecoration: 'none',
-                    transition: 'all 0.2s ease',
+                    transition: 'color 0.2s ease',
+                    padding: '4px 0',
+                    borderBottom: '1px solid transparent',
+                    display: 'inline-block',
                   }}
                   onMouseEnter={(e) => {
-                    (e.target as HTMLElement).style.color = 'var(--color-accent-blue)'
+                    e.currentTarget.style.color = 'var(--accent)'
+                    e.currentTarget.style.borderBottomColor = 'var(--accent)'
                   }}
                   onMouseLeave={(e) => {
-                    (e.target as HTMLElement).style.color = 'rgba(255,255,255,0.7)'
+                    e.currentTarget.style.color = 'var(--text-secondary)'
+                    e.currentTarget.style.borderBottomColor = 'transparent'
                   }}>
                     {link.label}
                   </Link>
@@ -117,58 +123,81 @@ export default function Navbar() {
             <ThemeSwitcher />
           </div>
 
-          {/* Botón Móvil */}
+          {/* Mobile toggle */}
           <button
-            className="mobile-only"
+            className="mobile-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
             style={{
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: '8px',
-              width: '40px',
-              height: '40px',
+              background: 'transparent',
+              border: '1px solid var(--border)',
+              borderRadius: '6px',
+              padding: '8px 10px',
+              cursor: 'pointer',
               display: 'none',
               flexDirection: 'column',
               gap: '5px',
               alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer'
             }}
           >
-            <span style={{ width: '20px', height: '2px', background: 'white', transition: '0.3s', transform: mobileOpen ? 'rotate(45deg) translateY(5px)' : '' }} />
-            <span style={{ width: '20px', height: '2px', background: 'white', transition: '0.3s', opacity: mobileOpen ? 0 : 1 }} />
-            <span style={{ width: '20px', height: '2px', background: 'white', transition: '0.3s', transform: mobileOpen ? 'rotate(-45deg) translateY(-5px)' : '' }} />
+            {[0, 1, 2].map((i) => (
+              <span key={i} style={{
+                display: 'block',
+                width: '20px',
+                height: '2px',
+                background: 'var(--text-primary)',
+                borderRadius: '1px',
+                transition: 'all 0.3s ease',
+                transform: mobileOpen
+                  ? i === 0 ? 'rotate(45deg) translateY(7px)'
+                  : i === 2 ? 'rotate(-45deg) translateY(-7px)'
+                  : 'scaleX(0)'
+                  : 'none',
+              }} />
+            ))}
           </button>
         </div>
 
-        {/* Menú Móvil */}
-        {mobileOpen && (
-          <div style={{
-            position: 'absolute',
-            top: '100%',
-            left: 0,
-            right: 0,
-            background: 'var(--color-secondary-bg)',
-            padding: '30px',
-            borderBottom: '1px solid rgba(255,255,255,0.05)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '20px'
-          }}>
+        {/* Mobile menu */}
+        <div style={{
+          display: mobileOpen ? 'block' : 'none',
+          background: 'var(--bg-surface)',
+          borderTop: '1px solid var(--border)',
+          padding: '24px',
+        }}>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '20px' }}>
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} style={{ color: 'white', textDecoration: 'none', fontWeight: 700, fontSize: '20px' }}>
-                {link.label}
-              </Link>
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  style={{
+                    fontFamily: 'Oswald, sans-serif',
+                    fontSize: '20px',
+                    fontWeight: 600,
+                    letterSpacing: '2px',
+                    textTransform: 'uppercase',
+                    color: 'var(--text-primary)',
+                    textDecoration: 'none',
+                    display: 'block',
+                  }}
+                >
+                  {link.label}
+                </Link>
+              </li>
             ))}
-            <ThemeSwitcher />
-          </div>
-        )}
+          </ul>
+          <ThemeSwitcher />
+        </div>
       </nav>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
-          .mobile-only { display: flex !important; }
+          .mobile-toggle { display: flex !important; }
+        }
+        @media (min-width: 769px) {
+          .mobile-toggle { display: none !important; }
         }
       `}</style>
     </>
