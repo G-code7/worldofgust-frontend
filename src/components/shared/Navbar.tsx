@@ -30,24 +30,17 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Scroll progress bar */}
+      {/* Scroll progress */}
       <div style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        height: '3px',
-        width: `${scrollProgress}%`,
+        position: 'fixed', top: 0, left: 0,
+        height: '3px', width: `${scrollProgress}%`,
         background: 'var(--gradient-accent)',
-        zIndex: 9999,
-        transition: 'width 0.1s linear',
+        zIndex: 9999, transition: 'width 0.1s linear',
         pointerEvents: 'none',
       }} />
 
       <nav style={{
-        position: 'fixed',
-        top: '3px', // debajo de la barra de progreso
-        left: 0,
-        right: 0,
+        position: 'fixed', top: '3px', left: 0, right: 0,
         zIndex: 1000,
         padding: scrolled ? '12px 0' : '20px 0',
         background: scrolled ? 'var(--bg-surface)' : 'transparent',
@@ -57,49 +50,54 @@ export default function Navbar() {
         transition: 'all 0.3s ease',
       }}>
         <div className="container" style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         }}>
 
-          {/* Logo — estilo <G-CODE/> */}
-          <Link href="/" style={{ textDecoration: 'none' }}>
+          {/* Logo — World of Gust */}
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
             <span style={{
               fontFamily: 'Oswald, sans-serif',
-              fontSize: '22px',
+              fontSize: '18px',
               fontWeight: 700,
-              letterSpacing: '2px',
+              letterSpacing: '3px',
               textTransform: 'uppercase',
+              color: 'var(--text-primary)',
               lineHeight: 1,
             }}>
-              <span style={{ color: 'var(--accent)' }}>&lt;</span>
-              <span style={{ color: 'var(--text-primary)' }}>G-CODE</span>
-              <span style={{ color: 'var(--accent)' }}>/&gt;</span>
+              World{' '}
+              <span style={{
+                background: 'var(--gradient-accent)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>
+                of Gust
+              </span>
+            </span>
+            <span style={{
+              fontFamily: 'Montserrat, sans-serif',
+              fontSize: '9px',
+              fontWeight: 600,
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+              color: 'var(--text-muted)',
+              marginTop: '3px',
+            }}>
+              Digital Studio
             </span>
           </Link>
 
           {/* Desktop nav */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '32px',
-          }} className="desktop-nav">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }} className="desktop-nav">
             <ul style={{
-              display: 'flex',
-              gap: '28px',
-              listStyle: 'none',
-              alignItems: 'center',
-              margin: 0,
-              padding: 0,
+              display: 'flex', gap: '28px', listStyle: 'none', margin: 0, padding: 0, alignItems: 'center',
             }}>
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} style={{
                     fontFamily: 'Montserrat, sans-serif',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                    letterSpacing: '1.5px',
-                    textTransform: 'uppercase',
+                    fontSize: '12px', fontWeight: 600,
+                    letterSpacing: '1.5px', textTransform: 'uppercase',
                     color: 'var(--text-secondary)',
                     textDecoration: 'none',
                     transition: 'color 0.2s ease',
@@ -121,6 +119,28 @@ export default function Navbar() {
               ))}
             </ul>
             <ThemeSwitcher />
+            <Link href="/contact" style={{
+              padding: '10px 20px',
+              background: 'var(--gradient-accent)',
+              color: 'white',
+              fontFamily: 'Oswald, sans-serif',
+              fontSize: '12px', fontWeight: 600,
+              letterSpacing: '2px', textTransform: 'uppercase',
+              textDecoration: 'none',
+              borderRadius: '6px',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              whiteSpace: 'nowrap',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-1px)'
+              e.currentTarget.style.boxShadow = 'var(--shadow-glow)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)'
+              e.currentTarget.style.boxShadow = 'none'
+            }}>
+              Get in Touch
+            </Link>
           </div>
 
           {/* Mobile toggle */}
@@ -142,11 +162,8 @@ export default function Navbar() {
           >
             {[0, 1, 2].map((i) => (
               <span key={i} style={{
-                display: 'block',
-                width: '20px',
-                height: '2px',
-                background: 'var(--text-primary)',
-                borderRadius: '1px',
+                display: 'block', width: '20px', height: '2px',
+                background: 'var(--text-primary)', borderRadius: '1px',
                 transition: 'all 0.3s ease',
                 transform: mobileOpen
                   ? i === 0 ? 'rotate(45deg) translateY(7px)'
@@ -165,38 +182,42 @@ export default function Navbar() {
           borderTop: '1px solid var(--border)',
           padding: '24px',
         }}>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '20px' }}>
+          <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {navLinks.map((link) => (
               <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  style={{
-                    fontFamily: 'Oswald, sans-serif',
-                    fontSize: '20px',
-                    fontWeight: 600,
-                    letterSpacing: '2px',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-primary)',
-                    textDecoration: 'none',
-                    display: 'block',
-                  }}
-                >
+                <Link href={link.href} onClick={() => setMobileOpen(false)} style={{
+                  fontFamily: 'Oswald, sans-serif',
+                  fontSize: '22px', fontWeight: 600,
+                  letterSpacing: '2px', textTransform: 'uppercase',
+                  color: 'var(--text-primary)', textDecoration: 'none', display: 'block',
+                }}>
                   {link.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <ThemeSwitcher />
+          <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+            <ThemeSwitcher />
+            <Link href="/contact" onClick={() => setMobileOpen(false)} style={{
+              padding: '12px 20px',
+              background: 'var(--gradient-accent)',
+              color: 'white',
+              fontFamily: 'Oswald, sans-serif',
+              fontSize: '13px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase',
+              textDecoration: 'none', borderRadius: '6px',
+            }}>
+              Get in Touch
+            </Link>
+          </div>
         </div>
       </nav>
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
           .desktop-nav { display: none !important; }
           .mobile-toggle { display: flex !important; }
         }
-        @media (min-width: 769px) {
+        @media (min-width: 1025px) {
           .mobile-toggle { display: none !important; }
         }
       `}</style>

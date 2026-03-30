@@ -8,42 +8,57 @@ interface FeaturedWorkProps {
   projects: WPProject[]
 }
 
-// Mock data — activo mientras WP no tenga proyectos reales
+// Proyectos reales del portfolio anterior
 const mockProjects: WPProject[] = [
   {
     id: '1',
-    slug: 'ecommerce-platform',
-    title: 'E-Commerce Platform',
+    slug: 'anima-collectiv',
+    title: 'Anima Collectiv',
     projectFields: {
-      tagline: 'WooCommerce headless con checkout personalizado y Stripe',
-      technologies: 'Next.js, WooCommerce, GraphQL, Stripe',
+      tagline: 'Scalable e-commerce platform for event ticketing with secure payments and user-friendly booking.',
+      technologies: 'React, WooCommerce, Stripe, WordPress',
       liveUrl: '#',
       githubUrl: '#',
     },
   },
   {
     id: '2',
-    slug: 'saas-dashboard',
-    title: 'SaaS Dashboard',
+    slug: 'creestudio',
+    title: 'Creestudio',
     projectFields: {
-      tagline: 'Dashboard analytics con visualización en tiempo real',
-      technologies: 'React, Django, PostgreSQL, Chart.js',
+      tagline: 'Engaging online portfolio and information hub with responsive design and easy content management.',
+      technologies: 'WordPress, Custom Theme, ACF',
       liveUrl: '#',
-      githubUrl: '#',
     },
   },
   {
     id: '3',
-    slug: 'headless-cms',
-    title: 'Headless CMS Blog',
+    slug: 'aroha',
+    title: 'Aroha',
     projectFields: {
-      tagline: 'WordPress headless + Next.js — Lighthouse score 98+',
-      technologies: 'Next.js, WordPress, WPGraphQL, Tailwind',
+      tagline: 'Online catalog for white goods with a custom quote request system to streamline sales.',
+      technologies: 'WordPress, WooCommerce, Custom Plugin',
       liveUrl: '#',
-      githubUrl: '#',
+    },
+  },
+  {
+    id: '4',
+    slug: 'avantistore',
+    title: 'AvantiStore',
+    projectFields: {
+      tagline: 'Stylish e-commerce store for jewelry, emphasizing product galleries and secure transactions.',
+      technologies: 'WooCommerce, Stripe, Custom Design',
+      liveUrl: '#',
     },
   },
 ]
+
+const projectTypes: Record<string, string> = {
+  'anima-collectiv': 'Event E-commerce',
+  'creestudio': 'Portfolio Site',
+  'aroha': 'Product Catalog',
+  'avantistore': 'Jewelry Store',
+}
 
 export default function FeaturedWork({ projects }: FeaturedWorkProps) {
   const displayProjects = projects && projects.length > 0 ? projects : mockProjects
@@ -52,8 +67,10 @@ export default function FeaturedWork({ projects }: FeaturedWorkProps) {
     <section style={{
       padding: '120px 0',
       background: 'var(--bg-base)',
+      position: 'relative',
     }}>
       <div className="container">
+
         {/* Header */}
         <div style={{
           display: 'flex',
@@ -66,7 +83,7 @@ export default function FeaturedWork({ projects }: FeaturedWorkProps) {
           <div>
             <span style={{
               fontFamily: 'Montserrat, sans-serif',
-              fontSize: '12px',
+              fontSize: '11px',
               fontWeight: 600,
               letterSpacing: '4px',
               textTransform: 'uppercase',
@@ -74,65 +91,74 @@ export default function FeaturedWork({ projects }: FeaturedWorkProps) {
               display: 'block',
               marginBottom: '16px',
             }}>
-              Selected Work
+              Our Work
             </span>
             <h2 style={{
               fontFamily: 'Oswald, sans-serif',
-              fontSize: 'clamp(36px, 5vw, 56px)',
+              fontSize: 'clamp(36px, 5vw, 52px)',
               fontWeight: 700,
               textTransform: 'uppercase',
-              letterSpacing: '2px',
+              letterSpacing: '1px',
               color: 'var(--text-primary)',
+              lineHeight: 1.05,
             }}>
-              Featured{' '}
+              Projects That{' '}
               <span style={{
                 background: 'var(--gradient-accent)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
               }}>
-                Projects
+                Speak
               </span>
             </h2>
           </div>
 
           <Link href="/work" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '12px 24px',
+            border: '1px solid var(--border-accent)',
+            borderRadius: '6px',
             fontFamily: 'Oswald, sans-serif',
-            fontSize: '13px',
+            fontSize: '12px',
             fontWeight: 600,
             letterSpacing: '2px',
             textTransform: 'uppercase',
             color: 'var(--accent)',
             textDecoration: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            whiteSpace: 'nowrap',
-            border: '1px solid var(--border-accent)',
-            padding: '10px 20px',
-            borderRadius: '6px',
             transition: 'all 0.2s ease',
+            whiteSpace: 'nowrap',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = 'var(--accent)'
             e.currentTarget.style.color = 'white'
+            e.currentTarget.style.borderColor = 'var(--accent)'
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = 'transparent'
             e.currentTarget.style.color = 'var(--accent)'
+            e.currentTarget.style.borderColor = 'var(--border-accent)'
           }}>
-            View All Work →
+            View All Projects →
           </Link>
         </div>
 
-        {/* Grid */}
+        {/* Featured (big) project */}
+        {displayProjects[0] && (
+          <FeaturedCard project={displayProjects[0]} />
+        )}
+
+        {/* Rest grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-          gap: '32px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '24px',
+          marginTop: '24px',
         }}>
-          {displayProjects.slice(0, 3).map((project, i) => (
-            <ProjectCard key={project.id} project={project} featured={i === 0} />
+          {displayProjects.slice(1, 4).map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </div>
@@ -140,138 +166,108 @@ export default function FeaturedWork({ projects }: FeaturedWorkProps) {
   )
 }
 
-function ProjectCard({ project, featured }: { project: WPProject; featured?: boolean }) {
+function FeaturedCard({ project }: { project: WPProject }) {
   const imageUrl = project.featuredImage?.node?.sourceUrl
   const tagline = (project.projectFields as any)?.tagline ?? ''
-  const technologies = project.projectFields?.technologies
-    ?.split(',')
-    .map((t: string) => t.trim())
-    .filter(Boolean) ?? []
+  const technologies = project.projectFields?.technologies?.split(',').map((t: string) => t.trim()).filter(Boolean) ?? []
+  const type = projectTypes[project.slug] ?? 'Web Project'
 
   return (
-    <Link href={`/work/${project.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
-      <article
-        style={{
-          borderRadius: '12px',
-          overflow: 'hidden',
-          background: 'var(--bg-surface)',
-          border: '1px solid var(--border)',
-          transition: 'all 0.3s ease',
-          cursor: 'pointer',
-          height: '100%',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'translateY(-6px)'
-          e.currentTarget.style.boxShadow = 'var(--shadow-card)'
-          e.currentTarget.style.borderColor = 'var(--border-accent)'
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'translateY(0)'
-          e.currentTarget.style.boxShadow = 'none'
-          e.currentTarget.style.borderColor = 'var(--border)'
-        }}
-      >
-        {/* Image area */}
+    <Link href={`/work/${project.slug}`} style={{ textDecoration: 'none', display: 'block', marginBottom: '24px' }}>
+      <article style={{
+        borderRadius: '16px',
+        overflow: 'hidden',
+        background: 'var(--bg-surface)',
+        border: '1px solid var(--border)',
+        display: 'grid',
+        gridTemplateColumns: '1.4fr 1fr',
+        minHeight: '340px',
+        transition: 'all 0.3s ease',
+        cursor: 'pointer',
+      }}
+      className="featured-card"
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = 'var(--border-accent)'
+        e.currentTarget.style.boxShadow = 'var(--shadow-card)'
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = 'var(--border)'
+        e.currentTarget.style.boxShadow = 'none'
+      }}>
+        {/* Image side */}
         <div style={{
-          height: featured ? '240px' : '200px',
           background: 'var(--bg-elevated)',
           position: 'relative',
           overflow: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          minHeight: '300px',
         }}>
           {imageUrl ? (
-            <Image
-              src={imageUrl}
-              alt={project.featuredImage?.node?.altText ?? project.title}
-              fill
-              style={{ objectFit: 'cover' }}
-            />
+            <Image src={imageUrl} alt={project.title} fill style={{ objectFit: 'cover' }} />
           ) : (
-            /* Placeholder con iniciales cuando no hay imagen */
             <div style={{
-              width: '100%',
-              height: '100%',
+              width: '100%', height: '100%',
               background: 'var(--bg-elevated)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
               position: 'relative',
             }}>
-              {/* Gradient overlay decorativo */}
               <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'var(--gradient-mesh)',
-                opacity: 0.5,
+                position: 'absolute', inset: 0,
+                background: 'var(--gradient-mesh)', opacity: 0.4,
               }} />
               <span style={{
                 fontFamily: 'Oswald, sans-serif',
-                fontSize: '56px',
-                fontWeight: 700,
-                letterSpacing: '4px',
+                fontSize: '72px', fontWeight: 700,
                 background: 'var(--gradient-accent)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                opacity: 0.3,
-                position: 'relative',
-                zIndex: 1,
+                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+                opacity: 0.25, position: 'relative', zIndex: 1, textTransform: 'uppercase',
               }}>
-                {project.title.slice(0, 2).toUpperCase()}
+                {project.title.slice(0, 2)}
               </span>
             </div>
           )}
-
-          {/* Bottom gradient overlay */}
-          {imageUrl && (
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(to top, var(--bg-surface) 0%, transparent 60%)',
-            }} />
-          )}
+          {/* Overlay gradient */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(135deg, transparent 50%, var(--bg-surface) 100%)',
+          }} />
         </div>
 
-        {/* Content */}
-        <div style={{ padding: '24px' }}>
+        {/* Content side */}
+        <div style={{
+          padding: '40px 36px',
+          display: 'flex', flexDirection: 'column', justifyContent: 'center',
+        }}>
+          <span style={{
+            fontFamily: 'Montserrat, sans-serif',
+            fontSize: '11px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase',
+            color: 'var(--accent)', display: 'block', marginBottom: '12px',
+          }}>
+            {type}
+          </span>
           <h3 style={{
             fontFamily: 'Oswald, sans-serif',
-            fontSize: '22px',
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: '1px',
-            color: 'var(--text-primary)',
-            marginBottom: tagline ? '8px' : '16px',
+            fontSize: '32px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px',
+            color: 'var(--text-primary)', marginBottom: '16px', lineHeight: 1.05,
           }}>
             {project.title}
           </h3>
-
-          {tagline && (
-            <p style={{
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '14px',
-              color: 'var(--text-secondary)',
-              lineHeight: 1.6,
-              marginBottom: '16px',
-            }}>
-              {tagline}
-            </p>
-          )}
+          <p style={{
+            fontFamily: 'Montserrat, sans-serif',
+            fontSize: '14px', lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: '24px',
+          }}>
+            {tagline}
+          </p>
 
           {technologies.length > 0 && (
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '20px' }}>
-              {technologies.slice(0, 4).map((tech: string) => (
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '28px' }}>
+              {technologies.map((tech: string) => (
                 <span key={tech} style={{
-                  padding: '3px 8px',
+                  padding: '3px 10px',
                   background: 'var(--bg-elevated)',
                   border: '1px solid var(--border)',
                   borderRadius: '3px',
                   fontFamily: 'Montserrat, sans-serif',
-                  fontSize: '11px',
-                  color: 'var(--accent)',
-                  fontWeight: 500,
+                  fontSize: '11px', color: 'var(--accent)', fontWeight: 500,
                 }}>
                   {tech}
                 </span>
@@ -279,66 +275,116 @@ function ProjectCard({ project, featured }: { project: WPProject; featured?: boo
             </div>
           )}
 
-          {/* Links */}
-          <div style={{
-            display: 'flex',
-            gap: '16px',
-            alignItems: 'center',
+          <span style={{
+            fontFamily: 'Oswald, sans-serif',
+            fontSize: '12px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase',
+            color: 'var(--accent)', display: 'flex', alignItems: 'center', gap: '8px',
           }}>
-            <span style={{
-              fontFamily: 'Oswald, sans-serif',
-              fontSize: '12px',
-              fontWeight: 600,
-              letterSpacing: '1.5px',
-              textTransform: 'uppercase',
-              color: 'var(--accent)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-            }}>
-              View Case Study →
-            </span>
+            View Case Study →
+          </span>
+        </div>
+      </article>
+      <style>{`
+        @media (max-width: 768px) {
+          .featured-card { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
+    </Link>
+  )
+}
 
-            {project.projectFields?.githubUrl && project.projectFields.githubUrl !== '#' && (
-              <a
-                href={project.projectFields.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                style={{
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontSize: '11px',
-                  color: 'var(--text-muted)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-              >
-                GitHub
-              </a>
-            )}
+function ProjectCard({ project }: { project: WPProject }) {
+  const imageUrl = project.featuredImage?.node?.sourceUrl
+  const tagline = (project.projectFields as any)?.tagline ?? ''
+  const type = projectTypes[project.slug] ?? 'Web Project'
 
-            {project.projectFields?.liveUrl && project.projectFields.liveUrl !== '#' && (
-              <a
-                href={project.projectFields.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                style={{
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontSize: '11px',
-                  color: 'var(--text-muted)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-              >
-                Live Demo ↗
-              </a>
-            )}
+  return (
+    <Link href={`/work/${project.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+      <article style={{
+        borderRadius: '12px',
+        overflow: 'hidden',
+        background: 'var(--bg-surface)',
+        border: '1px solid var(--border)',
+        transition: 'all 0.3s ease',
+        cursor: 'pointer',
+        height: '100%',
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'translateY(-5px)'
+        e.currentTarget.style.borderColor = 'var(--border-accent)'
+        e.currentTarget.style.boxShadow = 'var(--shadow-card)'
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translateY(0)'
+        e.currentTarget.style.borderColor = 'var(--border)'
+        e.currentTarget.style.boxShadow = 'none'
+      }}>
+        {/* Image */}
+        <div style={{
+          height: '200px',
+          background: 'var(--bg-elevated)',
+          position: 'relative', overflow: 'hidden',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          {imageUrl ? (
+            <Image src={imageUrl} alt={project.title} fill style={{ objectFit: 'cover' }} />
+          ) : (
+            <>
+              <div style={{ position: 'absolute', inset: 0, background: 'var(--gradient-mesh)', opacity: 0.4 }} />
+              <span style={{
+                fontFamily: 'Oswald, sans-serif', fontSize: '48px', fontWeight: 700,
+                background: 'var(--gradient-accent)',
+                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+                opacity: 0.25, position: 'relative', zIndex: 1, textTransform: 'uppercase',
+              }}>
+                {project.title.slice(0, 2)}
+              </span>
+            </>
+          )}
+          {/* Type badge */}
+          <div style={{
+            position: 'absolute', top: '12px', left: '12px',
+            padding: '4px 10px',
+            background: 'rgba(10,14,39,0.8)',
+            backdropFilter: 'blur(8px)',
+            border: '1px solid var(--border)',
+            borderRadius: '4px',
+            fontFamily: 'Montserrat, sans-serif',
+            fontSize: '10px', fontWeight: 600, letterSpacing: '1.5px', textTransform: 'uppercase',
+            color: 'var(--accent)',
+          }}>
+            {type}
           </div>
+        </div>
+
+        <div style={{ padding: '20px' }}>
+          <h3 style={{
+            fontFamily: 'Oswald, sans-serif',
+            fontSize: '20px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px',
+            color: 'var(--text-primary)', marginBottom: '8px',
+          }}>
+            {project.title}
+          </h3>
+          {tagline && (
+            <p style={{
+              fontFamily: 'Montserrat, sans-serif',
+              fontSize: '13px', lineHeight: 1.6, color: 'var(--text-secondary)',
+              marginBottom: '16px',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}>
+              {tagline}
+            </p>
+          )}
+          <span style={{
+            fontFamily: 'Oswald, sans-serif',
+            fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase',
+            color: 'var(--accent)',
+          }}>
+            View Project →
+          </span>
         </div>
       </article>
     </Link>

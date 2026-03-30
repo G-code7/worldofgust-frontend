@@ -4,22 +4,28 @@ import { ThemeProvider } from '@/context/ThemeContext'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Gustavo Liendo | Full Stack Developer',
-    template: '%s | G-CODE',
+    default: 'World of Gust | Digital Studio',
+    template: '%s | World of Gust',
   },
   description:
-    'Full Stack Developer specializing in React, Next.js, and WordPress Headless solutions. 5+ years crafting exceptional digital experiences.',
-  keywords: ['Full Stack Developer', 'React', 'Next.js', 'WordPress Headless', 'Python', 'Django'],
-  authors: [{ name: 'Gustavo Liendo' }],
-  creator: 'Gustavo Liendo',
+    'Digital Studio specializing in web design, e-commerce, and WordPress Headless solutions. Where ideas become exceptional digital experiences.',
+  keywords: [
+    'Digital Studio', 'Web Design', 'Web Development',
+    'E-commerce', 'WordPress Headless', 'Next.js',
+    'worldofgust', 'World of Gust',
+  ],
+  authors: [{ name: 'Gustavo Liendo', url: 'https://worldofgust.com' }],
+  creator: 'World of Gust',
+  metadataBase: new URL('https://worldofgust.com'),
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    siteName: 'G-CODE | Gustavo Liendo',
+    siteName: 'World of Gust',
+    url: 'https://worldofgust.com',
   },
-  robots: {
-    index: true,
-    follow: true,
+  robots: { index: true, follow: true },
+  icons: {
+    icon: '/favicon.ico',
   },
 }
 
