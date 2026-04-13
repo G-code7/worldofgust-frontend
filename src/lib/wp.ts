@@ -26,9 +26,12 @@ export interface WPProject {
     node: { sourceUrl: string; altText: string }
   }
   projectFields?: {
+    tagline?: string
     technologies?: string
     githubUrl?: string
     liveDemo?: string
+    liveUrl?: string
+    category?: string
   }
 }
 
