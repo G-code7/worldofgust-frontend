@@ -166,7 +166,7 @@ function DefaultCard({ eyebrow, title, description, tags, href, cta, image, imag
           }}
         >
           {image ? (
-            <Image src={image} alt={imageAlt} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 400px" />
+            <Image src={image} alt={imageAlt ?? ''} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 400px" />
           ) : (
             <>
               <div style={{ position: 'absolute', inset: 0, background: 'var(--gradient-mesh)', opacity: 0.4 }} />
