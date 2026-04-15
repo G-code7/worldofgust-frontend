@@ -16,7 +16,7 @@ const mockProjects: WPProject[] = [
       tagline: 'Scalable e-commerce platform for event ticketing with secure payments and user-friendly booking.',
       technologies: 'React, WooCommerce, Stripe, WordPress',
       category: 'E-commerce',
-      liveUrl: '#',
+      liveDemo: '#',
     } as any,
   },
   {
@@ -27,7 +27,7 @@ const mockProjects: WPProject[] = [
       tagline: 'Engaging online portfolio and information hub with responsive design and easy content management.',
       technologies: 'WordPress, Custom Theme, ACF',
       category: 'Business Website',
-      liveUrl: '#',
+      liveDemo: '#',
     } as any,
   },
   {
@@ -38,7 +38,7 @@ const mockProjects: WPProject[] = [
       tagline: 'Online catalog for white goods with a custom quote request system to streamline sales.',
       technologies: 'WordPress, WooCommerce, Custom Plugin',
       category: 'E-commerce',
-      liveUrl: '#',
+      liveDemo: '#',
     } as any,
   },
   {
@@ -49,7 +49,7 @@ const mockProjects: WPProject[] = [
       tagline: 'Stylish e-commerce store for jewelry, emphasizing product galleries and secure transactions.',
       technologies: 'WooCommerce, Stripe, Custom Design',
       category: 'E-commerce',
-      liveUrl: '#',
+      liveDemo: '#',
     } as any,
   },
   {
@@ -60,7 +60,7 @@ const mockProjects: WPProject[] = [
       tagline: 'Reservations and booking platform for tourism operators across Latin America.',
       technologies: 'Next.js, TypeScript, REST API',
       category: 'Web App',
-      liveUrl: '#',
+      liveDemo: '#',
     } as any,
   },
   {
@@ -71,7 +71,7 @@ const mockProjects: WPProject[] = [
       tagline: 'This very site — headless WordPress backend with a Next.js frontend and full bilingual support.',
       technologies: 'Next.js, WordPress Headless, GraphQL, Tailwind',
       category: 'Headless WordPress',
-      liveUrl: '#',
+      liveDemo: '#',
     } as any,
   },
 ]

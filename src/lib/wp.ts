@@ -47,9 +47,11 @@ export async function fetchFeaturedProjects(): Promise<WPProject[]> {
             node { sourceUrl altText }
           }
           projectFields {
+            tagline
             technologies
             githubUrl
             liveDemo
+            category
           }
         }
       }

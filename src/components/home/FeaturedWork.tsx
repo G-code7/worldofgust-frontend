@@ -17,7 +17,7 @@ const mockProjects: WPProject[] = [
     projectFields: {
       tagline: 'Scalable e-commerce platform for event ticketing with secure payments and user-friendly booking.',
       technologies: 'React, WooCommerce, Stripe, WordPress',
-      liveUrl: '#',
+      liveDemo: '#',
       githubUrl: '#',
     },
   },
@@ -28,7 +28,7 @@ const mockProjects: WPProject[] = [
     projectFields: {
       tagline: 'Engaging online portfolio and information hub with responsive design and easy content management.',
       technologies: 'WordPress, Custom Theme, ACF',
-      liveUrl: '#',
+      liveDemo: '#',
     },
   },
   {
@@ -38,7 +38,7 @@ const mockProjects: WPProject[] = [
     projectFields: {
       tagline: 'Online catalog for white goods with a custom quote request system to streamline sales.',
       technologies: 'WordPress, WooCommerce, Custom Plugin',
-      liveUrl: '#',
+      liveDemo: '#',
     },
   },
   {
@@ -48,7 +48,7 @@ const mockProjects: WPProject[] = [
     projectFields: {
       tagline: 'Stylish e-commerce store for jewelry, emphasizing product galleries and secure transactions.',
       technologies: 'WooCommerce, Stripe, Custom Design',
-      liveUrl: '#',
+      liveDemo: '#',
     },
   },
 ]
