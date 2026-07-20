@@ -3,7 +3,7 @@ import Navbar from '@/components/shared/Navbar'
 import Footer from '@/components/shared/Footer'
 import PageHero from '@/components/ui/PageHero'
 import Button from '@/components/ui/Button'
-import WorkGrid from '@/app/work/Workgrid'
+import WorkGrid from '@/components/work/Workgrid'
 import CTABanner from '@/components/home/CTABanner'
 import { fetchAllProjects } from '@/lib/wp'
 
