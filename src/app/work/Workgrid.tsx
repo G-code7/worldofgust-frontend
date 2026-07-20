@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { WPProject } from '@/lib/wp'
 
-// ─── Mock data (fallback while WP integration is pending) ─────────────────────
+// ─── Mock data (fallback mientras se cargan proyectos reales) ─────────────────
 
 const mockProjects: WPProject[] = [
   {
@@ -13,66 +13,60 @@ const mockProjects: WPProject[] = [
     slug: 'anima-collectiv',
     title: 'Anima Collectiv',
     projectFields: {
-      tagline: 'Scalable e-commerce platform for event ticketing with secure payments and user-friendly booking.',
+      shortDescription: 'Scalable e-commerce platform for event ticketing with secure payments and user-friendly booking.',
       technologies: 'React, WooCommerce, Stripe, WordPress',
-      category: 'E-commerce',
       liveDemo: '#',
-    } as any,
+    },
   },
   {
     id: '2',
     slug: 'creestudio',
     title: 'Creestudio',
     projectFields: {
-      tagline: 'Engaging online portfolio and information hub with responsive design and easy content management.',
+      shortDescription: 'Engaging online portfolio and information hub with responsive design and easy content management.',
       technologies: 'WordPress, Custom Theme, ACF',
-      category: 'Business Website',
       liveDemo: '#',
-    } as any,
+    },
   },
   {
     id: '3',
     slug: 'aroha',
     title: 'Aroha',
     projectFields: {
-      tagline: 'Online catalog for white goods with a custom quote request system to streamline sales.',
+      shortDescription: 'Online catalog for white goods with a custom quote request system to streamline sales.',
       technologies: 'WordPress, WooCommerce, Custom Plugin',
-      category: 'E-commerce',
       liveDemo: '#',
-    } as any,
+    },
   },
   {
     id: '4',
     slug: 'avantistore',
     title: 'AvantiStore',
     projectFields: {
-      tagline: 'Stylish e-commerce store for jewelry, emphasizing product galleries and secure transactions.',
+      shortDescription: 'Stylish e-commerce store for jewelry, emphasizing product galleries and secure transactions.',
       technologies: 'WooCommerce, Stripe, Custom Design',
-      category: 'E-commerce',
       liveDemo: '#',
-    } as any,
+    },
   },
   {
     id: '5',
     slug: 'ventu-platform',
     title: 'Ventu',
     projectFields: {
-      tagline: 'Reservations and booking platform for tourism operators across Latin America.',
+      shortDescription: 'Reservations and booking platform for tourism operators across Latin America.',
       technologies: 'Next.js, TypeScript, REST API',
-      category: 'Web App',
       liveDemo: '#',
-    } as any,
+    },
   },
   {
     id: '6',
     slug: 'worldofgust-com',
     title: 'World of Gust',
     projectFields: {
-      tagline: 'This very site — headless WordPress backend with a Next.js frontend and full bilingual support.',
+      shortDescription: 'This very site — headless WordPress backend with a Next.js frontend and full bilingual support.',
       technologies: 'Next.js, WordPress Headless, GraphQL, Tailwind',
-      category: 'Headless WordPress',
       liveDemo: '#',
-    } as any,
+    },
   },
 ]
 
@@ -86,6 +80,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
   const displayProjects = projects.length > 0 ? projects : mockProjects
   const [activeFilter, setActiveFilter] = useState('All')
 
+  // category vendrá de WP cuando lo agreguemos; por ahora solo "All" funciona con datos reales
   const filtered = activeFilter === 'All'
     ? displayProjects
     : displayProjects.filter((p) => {
@@ -179,12 +174,9 @@ export default function WorkGrid({ projects }: WorkGridProps) {
 
 function ProjectCard({ project, index }: { project: WPProject; index: number }) {
   const imageUrl = project.featuredImage?.node?.sourceUrl
-  const fields = project.projectFields as any
-  const tagline = fields?.tagline ?? ''
-  const category = fields?.category ?? 'Web Project'
-  const technologies = fields?.technologies?.split(',').map((t: string) => t.trim()).filter(Boolean) ?? []
-
-  // Alternate accent colors for visual rhythm
+  const fields = project.projectFields
+  const description = fields?.shortDescription ?? ''
+  const technologies = fields?.technologies?.split(',').map((t) => t.trim()).filter(Boolean) ?? []
   const accentColor = index % 2 === 0 ? 'var(--accent)' : 'var(--accent-secondary)'
 
   return (
@@ -221,7 +213,13 @@ function ProjectCard({ project, index }: { project: WPProject; index: number }) 
           flexShrink: 0,
         }}>
           {imageUrl ? (
-            <Image src={imageUrl} alt={project.title} fill style={{ objectFit: 'cover' }} sizes="400px" />
+            <Image
+              src={imageUrl}
+              alt={project.featuredImage?.node?.altText || project.title}
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="400px"
+            />
           ) : (
             <>
               <div style={{ position: 'absolute', inset: 0, background: 'var(--gradient-mesh)', opacity: 0.5 }} />
@@ -240,21 +238,6 @@ function ProjectCard({ project, index }: { project: WPProject; index: number }) 
               </div>
             </>
           )}
-
-          {/* Category badge */}
-          <div style={{
-            position: 'absolute', top: '12px', left: '12px',
-            padding: '4px 10px',
-            background: 'rgba(10,14,39,0.85)',
-            backdropFilter: 'blur(8px)',
-            border: '1px solid var(--border)',
-            borderRadius: '4px',
-            fontFamily: 'Montserrat, sans-serif',
-            fontSize: '10px', fontWeight: 600, letterSpacing: '1.5px', textTransform: 'uppercase',
-            color: accentColor,
-          }}>
-            {category}
-          </div>
 
           {/* Number badge */}
           <div style={{
@@ -278,7 +261,7 @@ function ProjectCard({ project, index }: { project: WPProject; index: number }) 
             {project.title}
           </h3>
 
-          {tagline && (
+          {description && (
             <p style={{
               fontFamily: 'Montserrat, sans-serif',
               fontSize: '13px', lineHeight: 1.6, color: 'var(--text-secondary)',
@@ -288,14 +271,14 @@ function ProjectCard({ project, index }: { project: WPProject; index: number }) 
               WebkitBoxOrient: 'vertical',
               overflow: 'hidden',
             }}>
-              {tagline}
+              {description}
             </p>
           )}
 
           {/* Tech stack */}
           {technologies.length > 0 && (
             <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '20px' }}>
-              {technologies.slice(0, 4).map((tech: string) => (
+              {technologies.slice(0, 4).map((tech) => (
                 <span key={tech} style={{
                   padding: '3px 8px',
                   background: 'var(--bg-elevated)',
