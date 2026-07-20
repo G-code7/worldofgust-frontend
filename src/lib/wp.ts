@@ -5,7 +5,7 @@ async function wpFetch<T>(query: string, variables?: Record<string, unknown>): P
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ query, variables }),
-    next: { revalidate: 3600 },
+    cache: 'no-store',
   })
   const json = await res.json()
   if (json.errors) {
