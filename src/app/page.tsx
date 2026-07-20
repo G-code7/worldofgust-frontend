@@ -23,7 +23,11 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const projects = await fetchFeaturedProjects().catch(() => [])
+  const projects = await fetchFeaturedProjects().catch((e) => {
+  console.error('fetchFeaturedProjects failed:', e)
+  return []
+})
+console.log('projects fetched:', projects)
 
   return (
     <>
