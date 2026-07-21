@@ -64,10 +64,23 @@ export default function ContactForm() {
     setError('')
     setSubmitting(true)
 
-    // Simulate sending — replace with real API call / Formspree / email service
-    await new Promise((res) => setTimeout(res, 1400))
-    setSubmitting(false)
-    setSubmitted(true)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          service: selectedService,
+        }),
+      })
+
+      if (!res.ok) throw new Error('Failed')
+      setSubmitted(true)
+    } catch {
+      setError('Something went wrong. Please try again or email us directly.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
