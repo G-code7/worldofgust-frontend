@@ -15,7 +15,7 @@ const services = [
   { href: '/services/landing-page', label: 'Landing Pages' },
   { href: '/services/business-website', label: 'Business Websites' },
   { href: '/services/ecommerce', label: 'E-commerce' },
-  { href: '/services/headless-wordpress', label: 'WordPress Headless' },
+  { href: '/services/custom-project', label: 'WordPress Headless' },
   { href: '/services/consulting', label: 'Consulting' },
 ]
 

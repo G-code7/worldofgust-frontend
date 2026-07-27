@@ -45,7 +45,7 @@ const services = [
       'WordPress as your CMS, Next.js as your frontend. Your team manages content effortlessly. Your users get blazing-fast performance.',
     features: ['WPGraphQL + ACF', 'Next.js frontend', '98+ Lighthouse score', 'Scalable architecture'],
     price: 'Custom Quote',
-    href: '/services/headless-wordpress',
+    href: '/services/custom-project',
     accentColor: 'var(--accent-secondary)',
   },
 ]
