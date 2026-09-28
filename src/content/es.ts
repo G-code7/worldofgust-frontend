@@ -698,7 +698,7 @@ const es: Dictionary = {
       sections: [
         {
           h: 'Responsable',
-          p: ['World of Gust, estudio web liderado por Gustavo Liendo, es responsable de los datos recopilados en este sitio. Contacto: hello@worldofgust.com.'],
+          p: ['World of Gust, estudio web liderado por Gustavo Liendo, es responsable de los datos recopilados en este sitio. Contacto: contact@worldofgust.com.'],
         },
         {
           h: 'Qué recopilamos',
@@ -721,7 +721,7 @@ const es: Dictionary = {
         },
         {
           h: 'Tus derechos',
-          p: ['Puedes solicitar acceso, corrección o eliminación de tus datos en cualquier momento escribiendo a hello@worldofgust.com.'],
+          p: ['Puedes solicitar acceso, corrección o eliminación de tus datos en cualquier momento escribiendo a contact@worldofgust.com.'],
         },
       ],
     },
@@ -737,7 +737,7 @@ const es: Dictionary = {
         },
         { h: 'Propiedad intelectual', p: ['Los textos, el diseño y el código de este sitio pertenecen a World of Gust. Los proyectos de clientes pertenecen a sus dueños y se muestran con permiso.'] },
         { h: 'Responsabilidad', p: ['Trabajamos para mantener esta información correcta, pero no garantizamos que esté libre de errores. Nada en este sitio constituye una oferta vinculante.'] },
-        { h: 'Contacto', p: ['Preguntas sobre estos términos: hello@worldofgust.com.'] },
+        { h: 'Contacto', p: ['Preguntas sobre estos términos: contact@worldofgust.com.'] },
       ],
     },
     cookies: {

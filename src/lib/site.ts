@@ -16,7 +16,7 @@ export const FOUNDER = {
 }
 
 export const CONTACT = {
-  email: 'hello@worldofgust.com',
+  email: 'contact@worldofgust.com',
   // TODO(gus): replace with the real number before publishing. Leave null to hide it.
   whatsapp: null as string | null,
 }

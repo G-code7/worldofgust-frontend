@@ -698,7 +698,7 @@ const en: Dictionary = {
       sections: [
         {
           h: 'Who is responsible',
-          p: ['World of Gust, a web studio led by Gustavo Liendo, is responsible for the data collected on this site. Contact: hello@worldofgust.com.'],
+          p: ['World of Gust, a web studio led by Gustavo Liendo, is responsible for the data collected on this site. Contact: contact@worldofgust.com.'],
         },
         {
           h: 'What we collect',
@@ -723,7 +723,7 @@ const en: Dictionary = {
         },
         {
           h: 'Your rights',
-          p: ['You can request access, correction or deletion of your data at any time by writing to hello@worldofgust.com.'],
+          p: ['You can request access, correction or deletion of your data at any time by writing to contact@worldofgust.com.'],
         },
       ],
     },
@@ -739,7 +739,7 @@ const en: Dictionary = {
         },
         { h: 'Intellectual property', p: ['Texts, design and code of this site belong to World of Gust. Client projects shown belong to their respective owners and appear with permission.'] },
         { h: 'Liability', p: ['We work to keep this information accurate but do not guarantee it is free of errors. Nothing on this site is a binding offer.'] },
-        { h: 'Contact', p: ['Questions about these terms: hello@worldofgust.com.'] },
+        { h: 'Contact', p: ['Questions about these terms: contact@worldofgust.com.'] },
       ],
     },
     cookies: {
