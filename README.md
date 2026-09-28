@@ -1,4 +1,4 @@
 # world of gust 
 
-> personal website  created and  developed by G 
+> personal website  created and  developed by G.
 
