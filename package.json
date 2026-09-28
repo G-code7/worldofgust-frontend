@@ -1,6 +1,6 @@
 {
   "name": "worldofgust-frontend",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "next": "16.1.6",
+    "next-intl": "^4.3.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "resend": "^6.17.2"
+    "resend": "^6.17.2",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
