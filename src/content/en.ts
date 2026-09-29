@@ -12,7 +12,7 @@ const en: Dictionary = {
       { label: 'About', href: '/about' },
       { label: 'Blog', href: '/blog' },
     ],
-    headerCta: 'Qualify your project',
+    headerCta: 'Request your proposal',
     menu: 'Menu',
     close: 'Close',
     language: 'Language',
@@ -36,7 +36,7 @@ const en: Dictionary = {
       reject: 'No thanks',
       more: 'Cookie policy',
     },
-    qualify: 'Qualify your project',
+    qualify: 'Request your proposal',
     faqTitle: 'Questions we get before every project',
     learnMore: 'See the details',
   },
@@ -50,7 +50,7 @@ const en: Dictionary = {
     hero: {
       title: "We don't build websites. We deploy revenue infrastructure.",
       lead: 'Fast sites, backend automation and a response SLA, for businesses that cannot afford a site that fails.',
-      primary: 'Qualify your project',
+      primary: 'Request your proposal',
       secondary: 'See the results',
     },
     receipt: {
@@ -213,7 +213,7 @@ const en: Dictionary = {
     investmentTitle: 'Investment',
     investment: `${usd(P.infrastructure.from)} - ${usd(P.infrastructure.to)}+ USD`,
     investmentNote: 'The range depends on the number of integrations and specific features. Plus the Performance plan from month two.',
-    cta: 'Qualify your project',
+    cta: 'Request your proposal',
     faq: [
       {
         q: 'Why headless WordPress instead of a normal WordPress theme?',
@@ -326,7 +326,7 @@ const en: Dictionary = {
     investmentTitle: 'Investment',
     investment: `${usd(P.retainers.essential)} - ${usd(P.retainers.operations)} USD per month`,
     investmentNote: 'Starts in month two of every project. Existing sites join after a technical audit.',
-    cta: 'Qualify your project',
+    cta: 'Request your proposal',
     whyTitle: 'Why it pays for itself',
     why: [
       {
@@ -585,11 +585,11 @@ const en: Dictionary = {
 
   contact: {
     meta: {
-      title: 'Qualify Your Project | Start with World of Gust',
+      title: 'Request your proposal | Start with World of Gust',
       description:
         'Answer a few questions about your business and budget. If there is a fit, you get a reply within 24 business hours and a discovery call.',
     },
-    title: 'Qualify your project',
+    title: 'Request your proposal',
     lead: 'Before we talk about budget, we need to understand your business.',
     intro:
       'This takes three minutes and lets us prepare a relevant proposal, not a generic template. If your project is a good fit, you will hear back within 24 business hours.',

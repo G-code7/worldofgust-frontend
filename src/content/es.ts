@@ -12,7 +12,7 @@ const es: Dictionary = {
       { label: 'Nosotros', href: '/about' },
       { label: 'Blog', href: '/blog' },
     ],
-    headerCta: 'Califica tu proyecto',
+    headerCta: 'Solicita tu propuesta',
     menu: 'Menú',
     close: 'Cerrar',
     language: 'Idioma',
@@ -36,7 +36,7 @@ const es: Dictionary = {
       reject: 'No, gracias',
       more: 'Política de cookies',
     },
-    qualify: 'Califica tu proyecto',
+    qualify: 'Solicita tu propuesta',
     faqTitle: 'Lo que nos preguntan antes de cada proyecto',
     learnMore: 'Ver el detalle',
   },
@@ -50,7 +50,7 @@ const es: Dictionary = {
     hero: {
       title: 'No hacemos páginas web. Desplegamos infraestructura que factura.',
       lead: 'Sitios rápidos, automatizaciones de backend y un SLA de respuesta, para negocios que no pueden darse el lujo de fallar.',
-      primary: 'Califica tu proyecto',
+      primary: 'Solicita tu propuesta',
       secondary: 'Ver resultados',
     },
     receipt: {
@@ -213,7 +213,7 @@ const es: Dictionary = {
     investmentTitle: 'Inversión',
     investment: `${usd(P.infrastructure.from)} - ${usd(P.infrastructure.to)}+ USD`,
     investmentNote: 'El rango depende del volumen de integraciones y funcionalidades. Más el plan Performance desde el mes 2.',
-    cta: 'Califica tu proyecto',
+    cta: 'Solicita tu propuesta',
     faq: [
       {
         q: '¿Por qué WordPress headless y no un tema de WordPress normal?',
@@ -326,7 +326,7 @@ const es: Dictionary = {
     investmentTitle: 'Inversión',
     investment: `${usd(P.retainers.essential)} - ${usd(P.retainers.operations)} USD al mes`,
     investmentNote: 'Empieza en el mes 2 de cada proyecto. Los sitios existentes entran después de una auditoría técnica.',
-    cta: 'Califica tu proyecto',
+    cta: 'Solicita tu propuesta',
     whyTitle: 'Por qué se paga solo',
     why: [
       {
@@ -585,11 +585,11 @@ const es: Dictionary = {
 
   contact: {
     meta: {
-      title: 'Califica tu Proyecto | Empieza con World of Gust',
+      title: 'Solicita tu propuesta | Empieza con World of Gust',
       description:
         'Responde unas preguntas sobre tu negocio y presupuesto. Si hay coincidencia, recibes respuesta en menos de 24 horas hábiles y una llamada de descubrimiento.',
     },
-    title: 'Califica tu proyecto',
+    title: 'Solicita tu propuesta',
     lead: 'Antes de hablar de presupuesto, necesitamos entender tu negocio.',
     intro:
       'Toma tres minutos y nos permite preparar una propuesta relevante, no una plantilla genérica. Si tu proyecto es una buena coincidencia, tendrás respuesta en menos de 24 horas hábiles.',
