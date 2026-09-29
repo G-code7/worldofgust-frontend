@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Gustavo Liendo', url: SITE_URL }],
   creator: SITE_NAME,
   formatDetection: { telephone: false },
-  verification: { google: 'edfb1c484b9b3e2b' },
+  verification: { google: 'gOfsemQwcsmmDxf7B22Wn2YRYA5b85h40dgTvspfido' },
 }
 
 export const viewport: Viewport = {
