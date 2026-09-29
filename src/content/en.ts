@@ -93,7 +93,7 @@ const en: Dictionary = {
       items: [
         {
           name: 'Digital Infrastructure',
-          tagline: 'Corporate sites and platforms on Next.js with a headless CMS your team can edit.',
+          tagline: 'From high-performance corporate sites to custom web applications. Frontend, backend and cloud, from one accountable person.',
           price: `${usd(P.infrastructure.from)} - ${usd(P.infrastructure.to)}+`,
           href: '/services/digital-infrastructure',
         },
@@ -125,7 +125,7 @@ const en: Dictionary = {
 
   services: {
     meta: {
-      title: 'Web Development Services for Growing Businesses',
+      title: 'Web Development and Custom Applications for Businesses',
       description:
         'Digital infrastructure, express commerce sites and monthly operations plans. Ordered by the business problem they solve, with price ranges up front.',
     },
@@ -134,8 +134,8 @@ const en: Dictionary = {
     items: [
       {
         name: 'Digital Infrastructure',
-        problem: 'Your site exists but does not work for you: slow, hard to update, and nobody answers when it breaks.',
-        forWho: 'Companies, professional services and brands that sell through their site.',
+        problem: 'You need more than a page: a system that does something for your business. Or your current site is slow, hard to update, and nobody answers when it breaks.',
+        forWho: 'Companies and startups that need a serious site, a platform or a custom web application.',
         price: `${usd(P.infrastructure.from)} - ${usd(P.infrastructure.to)}+`,
         href: '/services/digital-infrastructure',
       },
@@ -180,15 +180,15 @@ const en: Dictionary = {
 
   infrastructure: {
     meta: {
-      title: 'Corporate Web Development on Next.js and Headless WordPress',
-      description: `Corporate sites and platforms with Lighthouse 90+, a CMS your team can edit and a ${SLA.performance}h SLA. Investment ${usd(P.infrastructure.from)}-${usd(P.infrastructure.to)}+.`,
+      title: 'Web Development and Custom Applications on Next.js',
+      description: `Corporate sites, platforms and custom web applications with Lighthouse 90+, a real backend and an SLA. Frontend, backend and cloud. From ${usd(P.infrastructure.from)}.`,
     },
     breadcrumb: 'Digital Infrastructure',
     title: 'Corporate Digital Infrastructure',
-    lead: 'A website that works as a business asset: fast, editable by your team, connected to your tools and maintained after launch.',
+    lead: 'From a corporate site to a custom application, built as real software: fast, connected to your tools and maintained after launch.',
     problemTitle: 'The problem',
     problem:
-      'Your company has an online presence, but not a digital asset that works. The site loads slowly, does not convert, and depends on someone who took weeks to answer the last time something broke.',
+      'Your company needs something that works, not just something that looks good. A site that captures leads and connects to your operation, or a custom application that solves a problem no off-the-shelf tool solves. And that does not depend on someone who takes weeks to answer when something breaks.',
     includesTitle: 'What is included',
     includes: [
       'Next.js site with Lighthouse 90+ guaranteed at launch',
@@ -197,6 +197,7 @@ const en: Dictionary = {
       'Technical SEO foundation: metadata, schema, sitemap, hreflang',
       `${SLA.performance}-business-hour response SLA from month two`,
       'One week of onboarding for your team',
+      'Custom backend and business logic when the project calls for it: APIs, databases and integrations (Django, AWS)',
     ],
     excludesTitle: 'What is not included',
     excludes: [
@@ -238,7 +239,7 @@ const en: Dictionary = {
     breadcrumb: 'Express Commerce System',
     title: 'Express Commerce System',
     tagline: `From idea to live in ${DAYS} days. No page builders. No plugins that break.`,
-    lead: 'An ultra-light site for businesses that value speed over ornament. Menu or catalog, orders or bookings, WhatsApp and Maps.',
+    lead: 'An ultra-light site built by someone who knows WordPress and Shopify inside out, not a template thrown together in a hurry. Menu or catalog, orders or bookings, WhatsApp and Maps.',
     problemTitle: 'The problem',
     problem:
       'You have a working business: a restaurant, a shop, a local service. Your customers land on a slow site that breaks on mobile, or on nothing at all. Every day it stays that way, someone else gets that customer.',
@@ -250,6 +251,7 @@ const en: Dictionary = {
       'Lighthouse 90+ guaranteed at launch',
       'Domain and hosting configured and handed over to you',
       'A simple editing panel, no technical knowledge needed',
+      'Built on WordPress or Shopify to fit your case, hand-optimized to load like a custom site',
     ],
     excludesTitle: 'What is not included',
     excludes: [
