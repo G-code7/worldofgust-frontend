@@ -1,81 +1,50 @@
-import { MetadataRoute } from 'next'
-import { fetchAllProjects } from '@/lib/wp'
+import type { MetadataRoute } from 'next'
+import { routing, type AppPathname } from '@/i18n/routing'
+import { localizedUrl } from '@/lib/seo'
+import { fetchAllProjects, fetchPosts } from '@/lib/wp'
+
+type Href = AppPathname | { pathname: AppPathname; params: Record<string, string> }
+
+const STATIC: { href: AppPathname; priority: number; changeFrequency: 'weekly' | 'monthly' | 'yearly' }[] = [
+  { href: '/', priority: 1, changeFrequency: 'weekly' },
+  { href: '/services', priority: 0.9, changeFrequency: 'monthly' },
+  { href: '/services/digital-infrastructure', priority: 0.9, changeFrequency: 'monthly' },
+  { href: '/services/express-commerce', priority: 0.9, changeFrequency: 'monthly' },
+  { href: '/services/digital-operations', priority: 0.8, changeFrequency: 'monthly' },
+  { href: '/pricing', priority: 0.8, changeFrequency: 'monthly' },
+  { href: '/work', priority: 0.8, changeFrequency: 'weekly' },
+  { href: '/about', priority: 0.6, changeFrequency: 'monthly' },
+  { href: '/lab', priority: 0.6, changeFrequency: 'monthly' },
+  { href: '/contact', priority: 0.7, changeFrequency: 'yearly' },
+  { href: '/legal/privacy', priority: 0.2, changeFrequency: 'yearly' },
+  { href: '/legal/terms', priority: 0.2, changeFrequency: 'yearly' },
+  { href: '/legal/cookies', priority: 0.2, changeFrequency: 'yearly' },
+]
+
+/** One entry per URL per locale, each carrying its hreflang alternates. */
+function pair(href: Href, rest: Omit<MetadataRoute.Sitemap[number], 'url'>): MetadataRoute.Sitemap {
+  const languages = Object.fromEntries(routing.locales.map((l) => [l, localizedUrl(l, href)]))
+  return routing.locales.map((l) => ({ url: localizedUrl(l, href), alternates: { languages }, ...rest }))
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://worldofgust.com'
+  const [projects, postsEn, postsEs] = await Promise.all([fetchAllProjects(), fetchPosts('en'), fetchPosts('es')])
 
-  // Rutas estáticas
-  const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/work`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-       url: `${baseUrl}/services/landing-page`, 
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    { 
-      url: `${baseUrl}/services/business-website`, 
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    { 
-      url: `${baseUrl}/services/ecommerce`, 
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    { 
-      url: `${baseUrl}/services/custom-project`, 
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-  ]
+  const staticRoutes = STATIC.flatMap((r) => pair(r.href, { priority: r.priority, changeFrequency: r.changeFrequency }))
 
-  // Rutas dinámicas
-  const projects = await fetchAllProjects().catch(() => [])
-  const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
-    url: `${baseUrl}/work/${project.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }))
+  const projectRoutes = projects.flatMap((p) =>
+    pair({ pathname: '/work/[slug]', params: { slug: p.slug } }, { lastModified: p.modified ? new Date(p.modified) : undefined, priority: 0.7 }),
+  )
 
-  return [...staticRoutes, ...projectRoutes]
+  // Blog index only once it has posts (it is noindex while empty).
+  const blog: MetadataRoute.Sitemap = []
+  if (postsEn.length) blog.push({ url: localizedUrl('en', '/blog'), priority: 0.7 })
+  if (postsEs.length) blog.push({ url: localizedUrl('es', '/blog'), priority: 0.7 })
+  for (const [locale, posts] of [['en', postsEn], ['es', postsEs]] as const) {
+    for (const p of posts) {
+      blog.push({ url: localizedUrl(locale, { pathname: '/blog/[slug]', params: { slug: p.slug } }), lastModified: new Date(p.modified), priority: 0.6 })
+    }
+  }
+
+  return [...staticRoutes, ...projectRoutes, ...blog]
 }
