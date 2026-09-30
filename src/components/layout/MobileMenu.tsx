@@ -27,18 +27,19 @@ export function MobileMenu({ label, closeLabel, children }: { label: string; clo
       >
         {open ? closeLabel : label}
       </button>
-      <div
-        id="mobile-nav"
-        hidden={!open}
-        // Any tap on a link inside the panel navigates; close the menu in the same gesture,
-        // which avoids reacting to pathname changes with setState inside an effect.
-        onClick={(e) => {
-          if ((e.target as HTMLElement).closest('a')) setOpen(false)
-        }}
-        className="fixed inset-x-0 top-[64px] bottom-0 z-40 overflow-y-auto border-t border-line bg-bg px-5 pb-10 pt-6"
-      >
-        {children}
-      </div>
+      {open && (
+        <div
+          id="mobile-nav"
+          // Full-height overlay below the 4rem (64px) header. Explicit height via dvh so mobile
+          // browser chrome does not collapse it; solid background so the page never shows through.
+          onClick={(e) => {
+            if ((e.target as HTMLElement).closest('a')) setOpen(false)
+          }}
+          className="fixed inset-x-0 top-16 z-40 h-[calc(100dvh-4rem)] overflow-y-auto border-t border-line bg-bg px-5 pb-10 pt-6"
+        >
+          {children}
+        </div>
+      )}
     </div>
   )
 }
