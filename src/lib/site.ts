@@ -11,7 +11,7 @@ export const SITE_NAME = 'World of Gust'
 
 export const FOUNDER = {
   name: 'Gustavo Liendo',
-  linkedin: 'https://www.linkedin.com/in/gustavoliendo',
+  linkedin: 'https://www.linkedin.com/in/worldofgust/',
   github: 'https://github.com/G-code7',
 }
 
